@@ -1,0 +1,5 @@
+---
+
+DATA_WAREHOUSE_DATABASE: 'postgres://127.0.0.1/medeo_datawarehouse'
+APPLICATION_DATABASE: 'dbname=medeo_development'
+SCHEMA: 'application' # must already exist

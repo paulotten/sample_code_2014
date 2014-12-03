@@ -1,0 +1,44 @@
+td
+{
+  border:1px solid black;
+}
+td.invisible
+{
+  border: none;
+}
+td.subheader
+{
+  background-color:LightGrey;
+}
+td.red
+{
+  color:red;
+}
+td.green
+{
+  color:green;
+}
+th
+{
+  background-color:black;
+  color:white;
+}
+div#filter
+{
+  background-color: white;
+  position:fixed;
+  bottom: 0px;
+  right: 0px;
+}
+div#content
+{
+}
+div#bottomPadding
+{
+  float:left;
+  padding-bottom: 15px
+}
+img
+{
+  width:100%;
+}

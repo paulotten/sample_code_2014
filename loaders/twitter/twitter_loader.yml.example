@@ -1,0 +1,18 @@
+---
+
+# twitter user/app credentials
+# see https://dev.twitter.com/apps/1234567/show
+CONSUMER_KEY: ''
+CONSUMER_SECRET: ''
+# under "Your access token" section:
+ACCESS_TOKEN: ''
+ACCESS_TOKEN_SECRET: ''
+
+# connection info for our database
+DATABASE: 'postgres://127.0.0.1/medeo_datawarehouse'
+
+# names of tables in database to save results to
+FOLLOWERS: 'twitter_follower_count'
+SENT: 'twitter_sent_tweets'
+MENTION: 'twitter_mentions'
+SEARCH: 'twitter_medeo_search'

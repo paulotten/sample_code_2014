@@ -1,0 +1,40 @@
+h1
+{
+  font-size:350%;
+}
+img
+{
+  width:400px;
+}
+div#filter
+{
+  background-color: white;
+  position:fixed;
+  bottom: 0px;
+  right: 0px;
+}
+div#content
+{
+}
+div#bottomPadding
+{
+  float:left;
+  padding-bottom: 15px
+}
+div.category
+{
+  float:left;
+  width:100%;
+}
+div.subcategory
+{
+  float:left;
+  width:100%;
+}
+div.relatedGraphs
+{
+  background-color:gray;
+  float:left;
+  padding: 10px;
+  margin: 7px;
+}

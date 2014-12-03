@@ -1,0 +1,24 @@
+OVERVIEW:
+
+This loader loads obfuscated data from production nightly. It is scheduled in cron to run at 1am. The wrapper script (up one directory) outputs any errors to the Software Development chatroom on HipChat.
+
+Before this loader runs another cron job Davide set up should have copied the lasts obfuscated data to /home/medeo/latest_obfuscated.sql
+
+This obfuscated data is loaded into a local database called medeo_development. From there the data warehouse (medeo_datawarehouse) pulls the data via a database link.
+
+The first time this loader sees a table in medeo_development it create the corresponding table on medeo_datawarehouse in the application schema.
+
+The next time this loader sees the table it looks for updated rows and adds them to the data warehouse.
+
+If the application table has been changed (columns added or removed) the table is recreated and all the data for that table is reloaded.
+
+COMMON ISSUES:
+
+ISSUE #1:
+
+k2-scholar1 "bash run_application_loader.sh" failed.
+Data is more than 24 hours old. Failing.
+
+We don't have a recent copy of the obfuscated production data.
+
+The cron job that copies over the latest obfuscated data may not have run. Alternatively the obfuscator could be broken (and therefor the cron job has nothing to copy over).

@@ -1,0 +1,23 @@
+OVERVIEW:
+
+This loader connects to salesforce nightly (scheduled in cron) and pulls updates to the datawarehouse. The wrapper script (up one directory) outputs any errors to the Software Development chatroom on HipChat.
+
+The first time it sees a salesforce object with data (instances) it creates a corresponding table in the salesforce schema on the datawarehouse.
+
+The next time the loader sees a salesforce object with instances it asks salesforce for all instances that have been updated more recently than the last update already in the datawarehouse (max modified date for the corresponding table).
+
+If the SalesForce object has been changed (attributes / columns added or removed) the table is recreated and all the data for that object is reloaded.
+
+COMMON ISSUES:
+
+ISSUE #1:
+
+Databasedotcom::SalesForceError: authentication failure - Invalid Password
+
+The credentials we use to connect to salesforce have changed.
+
+There is a note in onelogin labelled "Salesforce credentials". See if it has been updated recently. If so update salesforce_loader.yml with the changes (you'll have to sudo otherwise you won't be able to save your changes). Then run the loader again: 
+
+sudo -u medeo ruby salesforce_loader.rb
+
+If the onelogin note has not been updated bug Richard.

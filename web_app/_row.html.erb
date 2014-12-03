@@ -1,0 +1,149 @@
+
+<% if(@nameColumn) %>
+  <%= render 'subheader' %>
+<% end %>
+
+<%
+dataset = filter(@viewName, @dateColumn)
+columnCount = filter(:times, :time).size # number of data columns we are expecting
+
+nameCol = @nameColumn
+dateCol = @dateColumn
+valueCol = @valueColumn
+
+names = Hash.new
+dates = Hash.new
+
+nil_string = 'nil values will mapped to this string then later be removed'
+
+showBottomTotal = false
+bottomTotal = Array.new
+totalTotal = 0
+if(nameCol != nil)
+  showBottomTotal = true
+end
+
+dataset.each do | row |
+  if(nameCol != nil)
+    name = row[nameCol]
+  else
+    name = @name
+  end
+
+  if(name == nil)
+    name = nil_string
+  end
+
+  if(!names[name])
+    names[name] = 0
+  end
+
+  if(!dates.has_key?(row[dateCol]))
+    dates[row[dateCol]] = Hash.new
+  end
+  dates[row[dateCol]][name] = row[valueCol]
+end
+
+data = Hash.new
+dates.each_key do | date |
+  names.each_key do | name |
+    if(name)
+      value = dates[date][name]
+
+      if(!data[name])
+        data[name] = Array.new
+      end
+
+      data[name].push(value)
+    end
+  end
+end
+%>
+<% 
+if(!@doNotSort)
+  list = names.keys.sort
+else
+  list = names.keys
+end
+
+list.each do | name |
+  if(name == nil_string)
+    next
+  end
+
+  previous = nil
+  total = 0
+  i = 0
+%>
+<tr>
+  <td />
+  <td><%= name %></td>
+  <% data[name].each do | value |
+    if(showBottomTotal)
+      if(bottomTotal[i] == nil)
+        bottomTotal[i] = 0
+      end
+
+      if(value != nil)
+        bottomTotal[i] += value
+      end
+
+      i += 1
+    end
+
+    change = nil
+    formatedChange = nil
+
+    if(value != nil && previous != nil && previous != 0)
+      change = (((value.to_f / previous) - 1) * 100).round(2)
+      formatedChange = change.round(2).to_s + '%'
+    end
+
+    if(value != nil)
+      total += value
+    end
+
+    previous = value
+
+    if(value == nil)
+      display = nil
+    elsif(value.is_a? Integer)
+      display = value
+    else
+      display = value.to_f.round(2)
+    end
+  %>
+  <td><%= display %></td>
+  <% if(params['show_change'] == 'yes') %>
+  <% if(change && change > 0) %>
+  <td class="green"><%= formatedChange %></td>
+  <% elsif(change && change < 0) %>
+  <td class="red"><%= formatedChange %></td>
+  <% else %>
+  <td><%= formatedChange %></td>
+  <% end %>
+  <% end %>
+  <% end %>
+  <% if(longDataset?(columnCount)) %>
+  <td><%= name %></td>
+  <% end %>
+  <td><% if(!@disableTotal); totalTotal += total %><%= total.to_f.round(2) %><% end %></td>
+</tr>
+<% end %>
+
+<% if(showBottomTotal) %>
+<tr>
+  <td />
+  <td>Total:</td>
+  <% bottomTotal.each do | total | %>
+  <td><%= total.to_f.round(2) %></td>
+  <% if(params['show_change'] == 'yes') %>
+  <td></td>
+  <% end %>
+  <% end %>
+  <% if(longDataset?(columnCount)) %>
+  <td />
+  <% end %>
+  <td><% if(!@disableTotal) %><%= totalTotal.to_f.round(2) %><% end %></td>
+</tr>
+<% end %>

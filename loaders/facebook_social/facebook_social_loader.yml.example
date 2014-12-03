@@ -1,0 +1,24 @@
+---
+
+# we have a long list of different types of tokens we can use
+# the folowing seems the simplest
+# facebook_application_id|application secret
+# eg: 1234567890|a1s2d3f4g5h6j7k8l9
+ACCESS_TOKEN: ''
+
+# our main page on facebook
+MAIN_PAGE: ''
+
+# our user id on facebook
+MEDEO_ID: ''
+
+# After how many days do we no longer care about posts?
+POST_EXPIRY: '6'
+
+# connection info for our database
+DATABASE: 'postgres://127.0.0.1/medeo_datawarehouse'
+
+# table names
+MAIN_PAGE_TABLE_NAME: 'facebook_main_page_stats'
+POSTS_TABLE_NAME: 'facebook_posts'
+COMMENTS_TABLE_NAME: 'facebook_comments'

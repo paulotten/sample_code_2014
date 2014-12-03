@@ -1,0 +1,21 @@
+---
+
+# connection info for our database
+DATABASE: 'postgres://127.0.0.1/medeo_development'
+SCHEMA: 'salesforce' # must already exist
+
+# salesforce test
+# CLIENT_ID: 'asdfghjkl1234567890'
+# CLIENT_SECRET: '1234567890'
+# HOST: 'test.salesforce.com'
+# USERNAME: 'richard@medeo.ca.staging'
+# PASSWORD: 'vancouver2010'
+# USER_SECRET: 'asdfghjkl1234567890'
+
+# salesforce production
+CLIENT_ID: ''
+CLIENT_SECRET: ''
+HOST: 'login.salesforce.com'
+USERNAME: ''
+PASSWORD: ''
+USER_SECRET: ''

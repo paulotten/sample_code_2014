@@ -1,0 +1,45 @@
+---
+
+# ids for our google analytics views
+ALL_SITES_VIEW_ID: 'ga:123456789'
+MARKETING_VIEW_ID: 'ga:123456789'
+WEB_APP_VIEW_ID: 'ga:1234567'
+# names for views, will be saved to database
+ALL_SITES_VIEW_NAME: 'All Sites'
+MARKETING_VIEW_NAME: 'Marketing'
+WEB_APP_VIEW_NAME: 'Web App'
+
+# connection info for our database
+DATABASE: 'postgres://127.0.0.1/medeo_datawarehouse'
+
+# name of table in database to save results to
+TABLE_NAME_1: 'google_analytics_with_location'
+TABLE_NAME_2: 'google_analytics_with_browser'
+# column names
+COLUMN_VIEW_NAME: 'view_name'
+COLUMN_VISIT_DATE: 'visit_date'
+
+# what date should we start at the first time we retrieve data?
+DEFAULT_START_DATE: '2012-12-31'
+
+# query parameters
+# our database table definition needs to match them
+DIMENSIONS_1: 'ga:hostname,ga:pagePath,ga:fullReferrer,ga:country,ga:city,ga:deviceCategory'
+DIMENSIONS_2: 'ga:hostname,ga:pagePath,ga:fullReferrer,ga:deviceCategory,ga:browser,ga:browserVersion'
+METRICS: 'ga:entrances,ga:visits,ga:newVisits,ga:pageviews,ga:bounces,ga:exits,ga:pageviewsPerVisit,ga:avgTimeOnSite,ga:avgTimeOnPage'
+
+# google analytics api details
+API_NAME: 'analytics'
+API_VERSION: 'v3'
+
+# google api authentication details
+APPLICATION_NAME: 'Medeo Metrics'
+APPLICATION_VERSION: '0.0.2'
+# I doubt that the above values matter for a service application like this
+TOKEN_CREDENTIAL_URI: 'https://accounts.google.com/o/oauth2/token'
+AUDIENCE: 'https://accounts.google.com/o/oauth2/token'
+SCOPE: 'https://www.googleapis.com/auth/analytics.readonly'
+# key details
+KEY_PATH: ''
+KEY_PASSWORD: ''
+KEY_ISSUER: ''
